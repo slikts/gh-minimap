@@ -1,0 +1,17 @@
+{
+  "name": "gh-minimap",
+  "icons": {
+    "128": "img/icon-128.png"
+  },
+  "background": { "scripts": ["js/hot-reload.js"] },
+  "version": "1.0.1",
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/*"],
+      "css": ["css/main.css"],
+      "js": ["js/main.js"],
+      "run_at": "document_end"
+    }
+  ]
+}

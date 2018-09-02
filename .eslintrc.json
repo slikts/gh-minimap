@@ -1,0 +1,12 @@
+{ 
+  "extends": "@slikts/prettier",
+  "env": {
+    "browser": true,
+    "webextensions": true
+  },
+  "rules": {
+    "no-continue": "off",
+    "no-void": "off",
+    "no-return-assign": ["error", "except-parens"]
+  }
+}
