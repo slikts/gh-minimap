@@ -94,8 +94,7 @@ const main = () => {
   const lineHeight = rows[0].offsetHeight
 
   const update = () => {
-    const rect = table.getBoundingClientRect()
-    const { top, bottom } = rect
+    const { top, bottom } = table.getBoundingClientRect()
     const minTop = Math.min(0, top)
     const line1 = Math.abs(Math.ceil(minTop / lineHeight))
     minimap.style.top = `${Math.max(top, 0)}px`
