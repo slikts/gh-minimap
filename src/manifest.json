@@ -3,8 +3,7 @@
   "icons": {
     "128": "img/icon-128.png"
   },
-  "background": { "scripts": ["js/hot-reload.js"] },
-  "version": "1.0.1",
+  "version": "1.0.0",
   "manifest_version": 2,
   "content_scripts": [
     {

@@ -1,4 +1,4 @@
-.minimap {
+.__minimap {
   overflow: hidden;
   position: fixed;
   top: 0;
@@ -6,20 +6,20 @@
   bottom: 0;
   z-index: 1;
 }
-.minimap-container {
+.__minimap-container {
   position: relative;
 }
-.minimap canvas {
+.__minimap canvas {
   image-rendering: pixelated;
   opacity: .5;
 }
-.minimap-focus {
+.__minimap-focus {
   background: #000;
   position: absolute;
   opacity: .05;
   width: 100%;
   transition: opacity .1s ease;
 }
-.minimap:hover .minimap-focus {
+.__minimap:hover .__minimap-focus {
   opacity: .1;
 }

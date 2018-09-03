@@ -1,3 +1,13 @@
+/*
+ ######   ##     ##         ##     ## #### ##    ## #### ##     ##    ###    ########  
+##    ##  ##     ##         ###   ###  ##  ###   ##  ##  ###   ###   ## ##   ##     ## 
+##        ##     ##         #### ####  ##  ####  ##  ##  #### ####  ##   ##  ##     ## 
+##   #### ######### ####### ## ### ##  ##  ## ## ##  ##  ## ### ## ##     ## ########  
+##    ##  ##     ##         ##     ##  ##  ##  ####  ##  ##     ## ######### ##        
+##    ##  ##     ##         ##     ##  ##  ##   ###  ##  ##     ## ##     ## ##        
+ ######   ##     ##         ##     ## #### ##    ## #### ##     ## ##     ## ##        
+*/
+
 const tableMemo = new WeakSet()
 
 const main = () => {
@@ -8,11 +18,11 @@ const main = () => {
   tableMemo.add(table)
   const canvas = document.createElement(`canvas`)
   const minimap = document.createElement(`div`)
-  minimap.classList.add(`minimap`)
+  minimap.classList.add(`__minimap`)
   const container = document.createElement(`div`)
-  container.classList.add(`minimap-container`)
+  container.classList.add(`__minimap-container`)
   const focus = document.createElement(`div`)
-  focus.classList.add(`minimap-focus`)
+  focus.classList.add(`__minimap-focus`)
   container.appendChild(focus)
   container.appendChild(canvas)
   minimap.style.backgroundColor = getComputedStyle(document.body).backgroundColor
@@ -53,7 +63,7 @@ const main = () => {
   }
 
   const minimapLineHeight = 3
-  ;[...rows].forEach(({ childNodes }, rowIndex) => {
+  void [...rows].forEach(({ childNodes }, rowIndex) => {
     let offset = 0
     const y = rowIndex * minimapLineHeight
     for (let i = 0; i < childNodes.length; i += 1) {
@@ -121,7 +131,7 @@ const main = () => {
     dragging = true
     scroll(e)
   })
-  container.addEventListener(`mouseup`, stopDrag)
+  document.addEventListener(`mouseup`, stopDrag)
   document.body.addEventListener(`mouseout`, e => {
     if (e.relatedTarget !== document.querySelector(`html`)) {
       return
