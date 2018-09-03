@@ -1,6 +1,6 @@
 {
   "name": "gh-minimap",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A source code minimap extension for GitHub",
   "scripts": {
     "build": "web-ext build -s src -a build -o",
