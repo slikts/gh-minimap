@@ -4,7 +4,8 @@
   "description": "A source code minimap extension for GitHub",
   "scripts": {
     "build": "web-ext build -s src -a build -o",
-    "lint": "web-ext lint -s src"
+    "lint": "web-ext lint -s src",
+    "run": "web-ext run -s src"
   },
   "devDependencies": {
     "@slikts/eslint-config-prettier": "^5.0.1",

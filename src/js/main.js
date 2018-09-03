@@ -139,6 +139,13 @@ const main = () => {
     dragging = false
   })
   window.addEventListener(`scroll`, update)
+  console.log(table.closest(`.file`).offsetWidth, width + 2)
+  document.styleSheets[0].insertRule(`@media (max-width: ${table.closest(`.file`).offsetWidth +
+    (width + 2) * 2}px) {
+    .__minimap {
+      border-left: 1px solid rgba(0, 0, 0, .1);
+    }
+  }`)
 }
 
 main()
