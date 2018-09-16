@@ -12,5 +12,6 @@
       "js": ["js/main.js"],
       "run_at": "document_end"
     }
-  ]
+  ],
+  "homepage_url": "https://github.com/slikts/gh-minimap"
 }
