@@ -1,9 +1,9 @@
 {
-  "name": "gh-minimap",
+  "name": "GitHub Source Code Minimap",
   "icons": {
     "128": "img/icon-128.png"
   },
-  "version": "1.1.0",
+  "version": "1.1.1",
   "manifest_version": 2,
   "content_scripts": [
     {
