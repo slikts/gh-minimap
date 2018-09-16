@@ -8,14 +8,52 @@
  ######   ##     ##         ##     ## #### ##    ## #### ##     ## ##     ## ##        
 */
 
-const tableMemo = new WeakSet()
+const tableCache = new WeakMap()
 
+const Listener = (target, eventType, handler, ...options) => ({
+  on: () => void target.addEventListener(eventType, handler, ...options),
+  off: () => void target.removeEventListener(eventType, handler, ...options),
+})
+
+const AutoListener = (...args) => {
+  const { on, off } = Listener(...args)
+  const [, , handler] = args
+  return {
+    off,
+    on: () => {
+      on()
+      handler()
+    },
+  }
+}
+
+const toggle = (listeners, method) => {
+  void listeners.forEach(listener => void listener[method]())
+}
+let lastTable
 const main = () => {
   const table = document.querySelector(`table.highlight`)
-  if (!table || tableMemo.has(table)) {
+  let listeners
+  const setupListen = () => {
+    toggle(listeners, `on`)
+    lastTable = table
+  }
+  if (lastTable != null && table !== lastTable) {
+    toggle(tableCache.get(lastTable), `off`)
+    lastTable = null
+  }
+  if (!table) {
     return
   }
-  tableMemo.add(table)
+  if (tableCache.has(table)) {
+    listeners = tableCache.get(table)
+    setupListen()
+    return
+  }
+  listeners = []
+  const listen = (...args) => void listeners.push(Listener(...args))
+  const listenAuto = (...args) => void listeners.push(AutoListener(...args))
+  tableCache.set(table, listeners)
   const canvas = document.createElement(`canvas`)
   const minimap = document.createElement(`div`)
   minimap.classList.add(`__minimap`)
@@ -110,7 +148,7 @@ const main = () => {
     container.style.marginTop =
       height > minimap.offsetHeight ? `${(-height + minimap.offsetHeight) * scrolled}px` : 0
   }
-  update()
+
   let dragging = false
   const scroll = e => {
     if (!dragging) {
@@ -123,30 +161,55 @@ const main = () => {
     const lineScroll = tableOffset + line * lineHeight - window.innerHeight / 2
     window.scrollTo(window.scrollX, Math.min(maxScroll, Math.max(minScroll, lineScroll)))
   }
-  container.addEventListener(`mousemove`, scroll)
+  listen(container, `mousemove`, scroll)
   const stopDrag = () => void (dragging = false)
-  container.addEventListener(`mousedown`, e => {
+
+  listen(container, `mousedown`, e => {
     e.preventDefault()
     dragging = true
     scroll(e)
   })
-  document.addEventListener(`mouseup`, stopDrag)
-  document.body.addEventListener(`mouseout`, e => {
+  listen(document, `mouseup`, stopDrag)
+  listen(document, `mouseout`, e => {
     if (e.relatedTarget !== document.querySelector(`html`)) {
       return
     }
     dragging = false
   })
-  window.addEventListener(`scroll`, update)
+  listenAuto(window, `scroll`, update)
+  window.requestAnimationFrame(update)
   document.styleSheets[0].insertRule(`@media (max-width: ${table.closest(`.file`).offsetWidth +
     (width + 2) * 2}px) {
     .__minimap {
       border-left: 1px solid rgba(0, 0, 0, .1);
     }
   }`)
+
+  const highlight = document.createElement(`div`)
+  highlight.classList.add(`__minimap-highlight`)
+  container.appendChild(highlight)
+  const updateHighlight = () => {
+    const { hash } = window.location
+    if (!hash) {
+      return
+    }
+    const [a, b = a + 1] = hash.match(/\d+/g).map(x => +x - 1)
+    highlight.style.top = `${a * minimapLineHeight}px`
+    highlight.style.height = `${(b - a) * minimapLineHeight}px`
+  }
+  listenAuto(window, `hashchange`, updateHighlight, false)
+
+  setupListen()
 }
 
 main()
 
-const observer = new MutationObserver(() => void main())
-observer.observe(document.querySelector(`.application-main`), { childList: true, subtree: true })
+let lastPath
+new MutationObserver(() => {
+  const { pathname } = window.location
+  if (pathname === lastPath) {
+    return
+  }
+  lastPath = pathname
+  main()
+}).observe(document.querySelector(`.application-main`), { childList: true, subtree: true })

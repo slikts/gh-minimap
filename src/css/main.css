@@ -24,3 +24,9 @@
 .__minimap:hover .__minimap-focus {
   opacity: .1;
 }
+.__minimap-highlight {
+  background: rgba(255, 255, 0, .15);
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+}
