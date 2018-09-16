@@ -72,7 +72,7 @@ const main = () => {
   rows[0].appendChild(dummy)
   const fontWidth = dummy.offsetWidth
   dummy.remove()
-  const width = Math.ceil(table.offsetWidth / fontWidth) + 1
+  const width = Math.ceil(table.closest(`.file`).offsetWidth / fontWidth) + 1
   const height = rows.length * (heightFactor + 1)
   const ctx = canvas.getContext(`2d`)
   canvas.width = width
