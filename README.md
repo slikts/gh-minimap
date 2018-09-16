@@ -2,6 +2,8 @@
 
 A simple extension that adds a minimap to GitHub's source code viewer.
 
+The motivation for making this extension was to see what a source code minimap based on simple pixel manipulation would look like.
+
 ## Demo
 
 * [JSFiddle demo][demo] of the minimap
