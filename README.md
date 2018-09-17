@@ -1,8 +1,8 @@
-# gh-minimap
+# GitHub Source Code Minimap Extension
 
 A simple extension that adds a minimap to GitHub's source code viewer.
 
-The motivation for making this extension was to see what a source code minimap based on simple pixel manipulation would look like.
+The motivation for making this extension was to see what a source code minimap based on simple pixel manipulation would look like. Turns out that it looks nice.
 
 ## Demo
 
@@ -10,14 +10,15 @@ The motivation for making this extension was to see what a source code minimap b
 
 ## Install
 
-* **[Chrome Web Store listing][webstore]**
-* **[Add-ons for Firefox (AMO) listing][amo]**
+* **[Chrome Web Store][webstore]**
+* **[Add-ons for Firefox (AMO)][amo]**
+* **[Opera add-ons][opera]**
 
 ## Screenshot
 
 ![screenshot][ss]
 
-## Other Extensions
+## Other Extensions for GitHub
 
 * [OctoLinker]
 * [Normal Tab Size][tabs]
@@ -28,3 +29,4 @@ The motivation for making this extension was to see what a source code minimap b
 [amo]: https://addons.mozilla.org/en-US/firefox/addon/gh-minimap/
 [OctoLinker]: https://octolinker.github.io/
 [tabs]: https://chrome.google.com/webstore/detail/normal-tab-size/kjjblpbmpgkbfnonlanolpcmlolafamn
+[opera]: #
